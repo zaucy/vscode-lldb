@@ -547,7 +547,7 @@ class Extension implements DebugConfigurationProvider, DebugAdapterDescriptorFac
     // Resolve paths of the native adapter libraries and cache them.
     async getAdapterDylibs(config: WorkspaceConfiguration): Promise<[string]> {
         if (!this.adapterDylibsCache) {
-            let liblldb = config.get<string>('library');
+            let liblldb = util.getConfigNoDefault(config, 'library');
             if (liblldb) {
                 liblldb = await adapter.findLibLLDB(liblldb)
             } else {
